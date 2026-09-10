@@ -10,13 +10,18 @@ public class Shooter : MonoBehaviour
     [SerializeField] float projectileSpeed = 10f;
     [SerializeField] float projectileLifeTime = 5f;
     [SerializeField] float baseFireRate = 0.2f;
+
+    [Header("Power Ups")]
+    [SerializeField] float doubleShotOffset = 0.3f;
     
-     [Header("Enemy")]
+    [Header("Enemy")]
     [SerializeField] float fireRateVariance = 0f;
     [SerializeField] float minFireRate = 0.1f;
     [SerializeField] bool isAI;
 
     [HideInInspector]public bool isFiring;
+    [HideInInspector] public bool piercingActive;  
+    [HideInInspector] public bool doubleShotActive; 
 
     AudioPlayer audioPlayer;
     Coroutine fireCoroutine;
@@ -57,21 +62,37 @@ public class Shooter : MonoBehaviour
     {
         while (true)
         {
-            GameObject instance = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
-            Rigidbody2D rb = instance.GetComponent<Rigidbody2D>();
-            if(rb != null)
+            if (doubleShotActive)
             {
-                rb.velocity = transform.up * projectileSpeed;
+                SpawnProjectile(transform.position + transform.right * doubleShotOffset);
+                SpawnProjectile(transform.position - transform.right * doubleShotOffset);
             }
-            Destroy(instance, projectileLifeTime);
-           
-            float fireInterval= Random.Range(baseFireRate - fireRateVariance, baseFireRate + fireRateVariance);
-            fireInterval = Mathf.Clamp(fireInterval, minFireRate, float.MaxValue);
-            
-            audioPlayer.PlayShootingClip();
+            else
+            {
+                SpawnProjectile(transform.position);
+            }
 
+            float fireInterval = Random.Range(baseFireRate - fireRateVariance, baseFireRate + fireRateVariance);
+            fireInterval = Mathf.Clamp(fireInterval, minFireRate, float.MaxValue);
+
+            audioPlayer.PlayShootingClip();
             yield return new WaitForSeconds(fireInterval);
         }
-        
+    }
+
+    void SpawnProjectile(Vector3 position)
+    {
+        GameObject instance = Instantiate(projectilePrefab, position, Quaternion.identity);
+
+        Rigidbody2D rb = instance.GetComponent<Rigidbody2D>();
+        if (rb != null) rb.velocity = transform.up * projectileSpeed;
+
+        if (piercingActive)
+        {
+            DamageDealer damageDealer = instance.GetComponent<DamageDealer>();
+            if (damageDealer != null) damageDealer.SetPierce(true);
+        }
+
+        Destroy(instance, projectileLifeTime);
     }
 }

@@ -14,10 +14,12 @@ public class PlayerMovement : MonoBehaviour
     Vector2 minBounds;
     Vector2 maxBounds;
     Shooter shooter;
+    Pause pause;
 
     void Awake()
     {
         shooter = GetComponent<Shooter>();
+        pause = FindObjectOfType<Pause>();
     }
 
     void Start()
@@ -55,6 +57,14 @@ public class PlayerMovement : MonoBehaviour
         if(shooter != null)
         {
             shooter.isFiring = value.isPressed;
+        }
+    }
+
+    void OnPause(InputValue value)
+    {
+        if(pause != null)
+        {
+            pause.PauseGame();
         }
     }
 }

@@ -11,7 +11,6 @@ public class UIGameOver : MonoBehaviour
     {
         scoreKeeper = FindObjectOfType<ScoreKeeper>();
     }
-
     
     void Start()
     {

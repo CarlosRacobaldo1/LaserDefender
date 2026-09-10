@@ -13,6 +13,11 @@ public class DamageDealer : MonoBehaviour
         return damage;
     }
 
+    public void SetPierce(bool pierce)
+    {
+        canPierce = pierce;
+    }
+
     public void Hit()
     {
         if (!canPierce)
@@ -21,6 +26,4 @@ public class DamageDealer : MonoBehaviour
         }
         
     }
-
-    
 }

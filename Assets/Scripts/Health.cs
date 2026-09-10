@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class Health : MonoBehaviour
 {
@@ -10,10 +11,11 @@ public class Health : MonoBehaviour
     [SerializeField] ParticleSystem hitEffect;
     [SerializeField] bool applyCameraShake;
     [SerializeField] bool isPlayer;
+    bool hasShield;
+    public event Action<bool> OnShieldStateChanged;
 
     CameraShake cameraShake;
     AudioPlayer audioPlayer;
-
     ScoreKeeper scoreKeeper;
     LevelManager levelManager;
 
@@ -30,16 +32,21 @@ public class Health : MonoBehaviour
     void OnTriggerEnter2D(Collider2D other)
     {
         DamageDealer damageDealer = other.GetComponent<DamageDealer>();
+        if (damageDealer == null) return;
 
-        if (damageDealer != null)
+        if (hasShield)
         {
-            TakeDamage(damageDealer.GetDamage());
-            
-            PlayHitEffect();
-            audioPlayer.PlayDamageClip();
-            ShakeCamera();
+            hasShield = false;
+            OnShieldStateChanged?.Invoke(false);
             damageDealer.Hit();
+            return;
         }
+
+        TakeDamage(damageDealer.GetDamage());
+        PlayHitEffect();
+        audioPlayer.PlayDamageClip();
+        ShakeCamera();
+        damageDealer.Hit();
     }
 
     public void TakeDamage(int damage)
@@ -49,6 +56,11 @@ public class Health : MonoBehaviour
         {
            Death();
         }
+    }
+
+    public void Heal(int amount)
+    {
+        currentHp = Mathf.Min(currentHp + amount, maxHp);
     }
 
     void Death()
@@ -71,6 +83,12 @@ public class Health : MonoBehaviour
         }
     }
 
+    public void ActivateShield()
+    {
+        hasShield = true;
+        OnShieldStateChanged?.Invoke(true);
+    }
+
     void ShakeCamera()
     {
         if(cameraShake!=null && applyCameraShake)
@@ -82,5 +100,9 @@ public class Health : MonoBehaviour
     public int GetHealth()
     {
         return currentHp;
+    }
+    public int GetMaxHealth() 
+    { 
+        return maxHp; 
     }
 }
