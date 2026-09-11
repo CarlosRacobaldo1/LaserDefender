@@ -9,6 +9,7 @@ public class Health : MonoBehaviour
     int currentHp;
     [SerializeField] int points = 50;
     [SerializeField] ParticleSystem hitEffect;
+    [SerializeField] ParticleSystem shieldHitEffect;
     [SerializeField] bool applyCameraShake;
     [SerializeField] bool isPlayer;
     bool hasShield;
@@ -19,12 +20,15 @@ public class Health : MonoBehaviour
     ScoreKeeper scoreKeeper;
     LevelManager levelManager;
 
+    PowerUpDrop powerUpDrop;
+
     void Awake()
     {
         cameraShake = Camera.main.GetComponent<CameraShake>();
         audioPlayer = FindObjectOfType<AudioPlayer>();
         scoreKeeper = FindObjectOfType<ScoreKeeper>();
         levelManager = FindObjectOfType<LevelManager>();
+        powerUpDrop = GetComponent<PowerUpDrop>();
         currentHp = maxHp;
     }
 
@@ -38,6 +42,11 @@ public class Health : MonoBehaviour
         {
             hasShield = false;
             OnShieldStateChanged?.Invoke(false);
+            if (shieldHitEffect != null)
+            {
+                ParticleSystem instance = Instantiate(shieldHitEffect, transform.position, Quaternion.identity);
+                Destroy(instance.gameObject, instance.main.duration + instance.main.startLifetime.constantMax);
+            }
             damageDealer.Hit();
             return;
         }
@@ -68,6 +77,7 @@ public class Health : MonoBehaviour
         if (!isPlayer)
         {
             scoreKeeper.AddScore(points);
+            powerUpDrop.DropPowerUp(transform.position);
         }
         else{ levelManager.GameOver(); }
          Destroy(gameObject);

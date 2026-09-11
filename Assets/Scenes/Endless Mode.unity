@@ -1336,6 +1336,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -9112525869806894933, guid: 8a17faf00af19cd49b61ad00b5f17d8d, type: 3}
+      propertyPath: shieldHitEffect
+      value: 
+      objectReference: {fileID: 94157602396500368, guid: 8c1601526ecfc464eb694b017f240a4b, type: 3}
     - target: {fileID: 2443314273027790121, guid: 8a17faf00af19cd49b61ad00b5f17d8d, type: 3}
       propertyPath: m_Name
       value: Player

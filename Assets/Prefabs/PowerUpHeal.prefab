@@ -95,6 +95,7 @@ GameObject:
   - component: {fileID: 7311549750920056000}
   - component: {fileID: 1927405598442804857}
   - component: {fileID: 5357694028566660690}
+  - component: {fileID: -7258268992113450756}
   m_Layer: 0
   m_Name: PowerUpHeal
   m_TagString: Untagged
@@ -166,3 +167,30 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: -0.06736059}
   m_Size: {x: 1.58, y: 0.63}
   m_Direction: 1
+--- !u!50 &-7258268992113450756
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7997615887922056236}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0.5
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
