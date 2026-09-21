@@ -54,17 +54,18 @@ public class PlayerMovement : MonoBehaviour
 
     void OnFire(InputValue value)
     {
-        if(shooter != null)
-        {
-            shooter.isFiring = value.isPressed;
-        }
+        if (shooter == null) return;
+
+        shooter.isFiring = Time.timeScale > 0f && value.isPressed;
     }
 
     void OnPause(InputValue value)
     {
-        if(pause != null)
-        {
-            pause.PauseGame();
-        }
+        if (!value.isPressed || pause == null) return;
+
+        pause.TogglePause();
+
+        if (shooter != null)
+            shooter.isFiring = false;
     }
 }

@@ -46,42 +46,60 @@ public class Shooter : MonoBehaviour
 
     void Fire()
     {
+        if (Time.timeScale == 0f)
+        {
+            if (fireCoroutine != null)
+            {
+                StopCoroutine(fireCoroutine);
+                fireCoroutine = null;
+            }
+            return;
+        }
+
         if (isFiring && fireCoroutine == null)
         {
             fireCoroutine = StartCoroutine(FireContinuously());
         }
-        else if(!isFiring && fireCoroutine !=null)
+        else if (!isFiring && fireCoroutine != null)
         {
             StopCoroutine(fireCoroutine);
             fireCoroutine = null;
         }
-        
     }
 
-    IEnumerator FireContinuously()
+   IEnumerator FireContinuously()
     {
         while (true)
         {
-            if (doubleShotActive)
+            if (Time.timeScale > 0f)
             {
-                SpawnProjectile(transform.position + transform.right * doubleShotOffset);
-                SpawnProjectile(transform.position - transform.right * doubleShotOffset);
-            }
-            else
-            {
-                SpawnProjectile(transform.position);
+                if (doubleShotActive)
+                {
+                    SpawnProjectile(transform.position + transform.right * doubleShotOffset);
+                    SpawnProjectile(transform.position - transform.right * doubleShotOffset);
+                }
+                else
+                {
+                    SpawnProjectile(transform.position);
+                }
+
+                audioPlayer.PlayShootingClip();
             }
 
-            float fireInterval = Random.Range(baseFireRate - fireRateVariance, baseFireRate + fireRateVariance);
+            float fireInterval = Random.Range(
+                baseFireRate - fireRateVariance,
+                baseFireRate + fireRateVariance
+            );
             fireInterval = Mathf.Clamp(fireInterval, minFireRate, float.MaxValue);
 
-            audioPlayer.PlayShootingClip();
             yield return new WaitForSeconds(fireInterval);
         }
     }
 
     void SpawnProjectile(Vector3 position)
     {
+        if (Time.timeScale == 0f) return;
+
         GameObject instance = Instantiate(projectilePrefab, position, Quaternion.identity);
 
         Rigidbody2D rb = instance.GetComponent<Rigidbody2D>();
