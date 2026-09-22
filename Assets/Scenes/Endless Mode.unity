@@ -330,9 +330,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 11500000, guid: 9b5977880430f704882605b9a0d92e12, type: 3}
-        m_TargetAssemblyTypeName: LevelManager, Assembly-CSharp
-        m_MethodName: 
+      - m_Target: {fileID: 1623262641}
+        m_TargetAssemblyTypeName: Pause, Assembly-CSharp
+        m_MethodName: ReturnToMainMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1557,9 +1557,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 11500000, guid: 9b5977880430f704882605b9a0d92e12, type: 3}
-        m_TargetAssemblyTypeName: UnityEngine.Object, UnityEngine
-        m_MethodName: 
+      - m_Target: {fileID: 1623262641}
+        m_TargetAssemblyTypeName: Pause, Assembly-CSharp
+        m_MethodName: ResumeGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1645,6 +1645,12 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 90b415660d7201d46966102fe171a9e8, type: 2}
   - {fileID: 11400000, guid: 359be66a48afefb4baa431e98770f4dc, type: 2}
   - {fileID: 11400000, guid: 27ff2d9cd724b304fa453b432efcff40, type: 2}
+  - {fileID: 11400000, guid: 33d6d1cefc7ef934b81593e28123f758, type: 2}
+  - {fileID: 11400000, guid: 066e6a241a0a6754fbae7db5fe21141a, type: 2}
+  - {fileID: 11400000, guid: 331bd88694d52544cbfc0283accc52a5, type: 2}
+  - {fileID: 11400000, guid: c2196b54bb4c25f49a71ba6317f9d50c, type: 2}
+  - {fileID: 11400000, guid: 6e8e0bfc873fdde4084d5ad61be9b0e0, type: 2}
+  - {fileID: 11400000, guid: bb5c7fb0d2c03a64fb7812cbb1ce4993, type: 2}
   timeBetweenWaves: 0
   isLooping: 1
   randomizeWaveOrder: 1
