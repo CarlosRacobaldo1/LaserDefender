@@ -24,6 +24,10 @@ PrefabInstance:
       propertyPath: damage
       value: 30
       objectReference: {fileID: 0}
+    - target: {fileID: 1855230996575820929, guid: 563beebcd9c66534e92d26d624e037d6, type: 3}
+      propertyPath: dropChance
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 2410147345149350521, guid: 563beebcd9c66534e92d26d624e037d6, type: 3}
       propertyPath: m_Points.Array.data[0].x
       value: 0.47261354

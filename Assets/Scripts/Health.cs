@@ -7,7 +7,7 @@ public class Health : MonoBehaviour
 {
     [SerializeField] int maxHp = 50;
     int currentHp;
-    [SerializeField] int points = 50;
+    [SerializeField] int points = 100;
     [SerializeField] ParticleSystem hitEffect;
     [SerializeField] ParticleSystem shieldHitEffect;
     [SerializeField] bool applyCameraShake;
@@ -61,9 +61,9 @@ public class Health : MonoBehaviour
     public void TakeDamage(int damage)
     {
         currentHp -= damage;
-        if(currentHp <= 0)
+        if (currentHp <= 0)
         {
-           Death();
+            Death();
         }
     }
 
@@ -73,20 +73,20 @@ public class Health : MonoBehaviour
     }
 
     void Death()
-    {   
+    {
         if (!isPlayer)
         {
             scoreKeeper.AddScore(points);
             powerUpDrop.DropPowerUp(transform.position);
         }
-        else{ levelManager.GameOver(); }
-         Destroy(gameObject);
-         audioPlayer.PlayExplosionClip();
+        else { levelManager.GameOver(); }
+        Destroy(gameObject);
+        audioPlayer.PlayExplosionClip();
     }
 
     void PlayHitEffect()
     {
-        if(hitEffect != null)
+        if (hitEffect != null)
         {
             ParticleSystem instance = Instantiate(hitEffect, transform.position, Quaternion.identity);
             Destroy(instance.gameObject, instance.main.duration + instance.main.startLifetime.constantMax);
@@ -101,7 +101,7 @@ public class Health : MonoBehaviour
 
     void ShakeCamera()
     {
-        if(cameraShake!=null && applyCameraShake)
+        if (cameraShake != null && applyCameraShake)
         {
             cameraShake.Play();
         }
@@ -111,8 +111,8 @@ public class Health : MonoBehaviour
     {
         return currentHp;
     }
-    public int GetMaxHealth() 
-    { 
-        return maxHp; 
+    public int GetMaxHealth()
+    {
+        return maxHp;
     }
 }

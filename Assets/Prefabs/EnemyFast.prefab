@@ -22,7 +22,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -3617815475783126582, guid: 563beebcd9c66534e92d26d624e037d6, type: 3}
       propertyPath: maxHp
-      value: 25
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: -3617815475783126582, guid: 563beebcd9c66534e92d26d624e037d6, type: 3}
       propertyPath: points
@@ -94,7 +94,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5472644005224576587, guid: 563beebcd9c66534e92d26d624e037d6, type: 3}
       propertyPath: m_Name
-      value: FastEnemy
+      value: EnemyFast
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 2410147345149350521, guid: 563beebcd9c66534e92d26d624e037d6, type: 3}
